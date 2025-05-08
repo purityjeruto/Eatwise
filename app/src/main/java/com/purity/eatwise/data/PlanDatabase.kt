@@ -1,4 +1,4 @@
 package com.purity.eatwise.data
 
-class PlanDatabase {
+class PlanDatabase1 {
 }

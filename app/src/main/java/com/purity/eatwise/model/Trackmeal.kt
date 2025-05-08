@@ -1,4 +1,4 @@
 package com.purity.eatwise.model
 
-class User1 {
+class Trackmeal {
 }
