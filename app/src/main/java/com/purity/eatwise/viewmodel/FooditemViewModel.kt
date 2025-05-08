@@ -1,0 +1,4 @@
+package com.purity.eatwise.viewmodel
+
+class FooditemViewModel {
+}

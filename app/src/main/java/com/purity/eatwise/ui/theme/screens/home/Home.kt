@@ -25,13 +25,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CalorieTrackerHomeScreen()
+            HomeScreen()
         }
     }
 }
 
 @Composable
-fun CalorieTrackerHomeScreen() {
+fun HomeScreen() {
     // 🧺 This is the live-updating list of food
     val foodList = remember { mutableStateListOf(
         Food("Apple", 95),
@@ -122,6 +122,6 @@ data class Food(val name: String, val calories: Int)
 @Preview
 @Composable
 private fun Homeprev() {
-    CalorieTrackerHomeScreen()
+    HomeScreen()
     
 }

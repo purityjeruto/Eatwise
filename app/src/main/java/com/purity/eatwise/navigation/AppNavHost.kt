@@ -9,11 +9,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.purity.eatwise.data.UserDatabase
 import com.purity.eatwise.repository.UserRepository
-import com.purity.eatwise.ui.theme.screens.home.HomeScreen
 import com.purity.eatwise.ui.theme.screens.splash.SplashScreen
 import com.purity.eatwise.viewmodel.AuthViewModel
-import com.purity.sokomart.ui.screens.auth.LoginScreen
-import com.purity.sokomart.ui.screens.auth.RegisterScreen
+import com.purity.eatwise.ui.screens.auth.LoginScreen
+import com.purity.eatwise.ui.screens.auth.RegisterScreen
+import com.purity.eatwise.ui.theme.screens.addfood.AddFoodScreen
+import com.purity.eatwise.ui.theme.screens.dailysummary.DailySummaryScreen
+import com.purity.eatwise.ui.theme.screens.home.HomeScreen
+import com.purity.eatwise.ui.theme.screens.profile.ProfileScreen
 
 
 @Composable
@@ -29,12 +32,19 @@ fun AppNavHost(
         startDestination = startDestination,
         modifier = modifier
     ) {
-        composable(ROUT_HOME) {
-            HomeScreen()
-        }
+
+
+            composable("profile") { ProfileScreen(viewModel) }
+            composable("addFood") { AddFoodScreen(viewModel) }
+            composable("summary") { DailySummaryScreen(viewModel) }
+
+
 
         composable(ROUT_SPLASH) {
             SplashScreen(navController)
+        }
+        composable(ROUT_HOME) {
+            HomeScreen()
         }
 
 
@@ -64,4 +74,5 @@ fun AppNavHost(
         }
     }
 }
+
 

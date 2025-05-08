@@ -78,7 +78,17 @@ dependencies {
     implementation("androidx.compose.runtime:runtime-livedata:1.7.8")
 
 
+    dependencies {
+        // ViewModel
+        implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+        implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
+        // Coroutines
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+        // DataStore
+        implementation("androidx.datastore:datastore-preferences:1.0.0")
+    }
 
 
 
