@@ -1,4 +1,4 @@
-package com.purity.sokomart.ui.screens.auth
+package com.purity.eatwise.ui.screens.auth
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
@@ -24,9 +24,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.*
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.purity.eatwise.viewmodel.AuthViewModel
 import com.purity.eatwise.R
 import com.purity.eatwise.model.User
@@ -39,7 +42,7 @@ import com.purity.eatwise.ui.theme.newOrange
 @Composable
 fun RegisterScreen(
     authViewModel: AuthViewModel,
-    navController: NavController,
+    navController: NavHostController,
     onRegisterSuccess: () -> Unit
 ) {
     var username by remember { mutableStateOf("") }
@@ -119,7 +122,9 @@ fun RegisterScreen(
                 readOnly = true,
                 label = { Text("Select Role") },
                 trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
-                modifier = Modifier.menuAnchor().fillMaxWidth()
+                modifier = Modifier
+                    .menuAnchor()
+                    .fillMaxWidth()
             )
             ExposedDropdownMenu(
                 expanded = expanded,
@@ -221,3 +226,6 @@ fun RegisterScreen(
         }
     }
 }
+
+
+    

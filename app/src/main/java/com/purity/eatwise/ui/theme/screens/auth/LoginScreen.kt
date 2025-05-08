@@ -1,4 +1,4 @@
-package com.purity.sokomart.ui.screens.auth
+package com.purity.eatwise.ui.screens.auth
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility

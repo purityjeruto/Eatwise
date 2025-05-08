@@ -9,7 +9,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.purity.eatwise.data.UserDatabase
 import com.purity.eatwise.repository.UserRepository
-import com.purity.eatwise.ui.theme.screens.addingentry.AboutScreen
 import com.purity.eatwise.ui.theme.screens.home.HomeScreen
 import com.purity.eatwise.ui.theme.screens.splash.SplashScreen
 import com.purity.eatwise.viewmodel.AuthViewModel
@@ -31,11 +30,9 @@ fun AppNavHost(
         modifier = modifier
     ) {
         composable(ROUT_HOME) {
-            HomeScreen(navController)
+            HomeScreen()
         }
-        composable(ROUT_ABOUT) {
-            AboutScreen(navController)
-        }
+
         composable(ROUT_SPLASH) {
             SplashScreen(navController)
         }
