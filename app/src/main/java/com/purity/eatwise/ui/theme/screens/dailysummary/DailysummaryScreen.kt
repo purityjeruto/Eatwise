@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.fastForEach
 import com.purity.eatwise.data.FoodItem
 import com.purity.eatwise.viewmodel.CalorieViewModel
+import com.purity.eatwise.viewmodel.FoodItem
 
 //import com.example.calorietracker.models.FoodItem
 //import com.example.calorietracker.viewmodels.CalorieViewModel

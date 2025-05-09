@@ -1,12 +1,18 @@
 package com.purity.eatwise.repository
 
 import com.purity.eatwise.data.ProfileDao
- // Replace with your actual profile class
 import com.purity.eatwise.model.Profile.UserProfile
+import kotlinx.coroutines.flow.Flow
 
-class ProfileRepository(private val profileDao: ProfileDao) {
+class ProfileRepository {
 
-        val allProfiles = profileDao.getAllProfiles()
+
+    fun ProfileDao.Companion.getAllProfiles(): Flow<List<UserProfile>> {return return TODO("Provide the return value")
+    }
+
+    class ProfileRepository(private val profileDao: ProfileDao) {
+        val allProfiles: Flow<List<UserProfile>> = ProfileDao.getAllProfiles()
+
 
         suspend fun insert(profile: UserProfile) = profileDao.insertProfile(profile)
 
@@ -17,9 +23,8 @@ class ProfileRepository(private val profileDao: ProfileDao) {
         suspend fun getById(id: Int) = profileDao.getProfileById(id)
 
         suspend fun saveProfile(profile: UserProfile) {
-                if (profile.id == 0) insert(profile)
-                else update(profile)
+            if (profile.id == 0) insert(profile)
+            else update(profile)
         }
-
+    }
 }
-

@@ -23,4 +23,6 @@ interface ProfileDao {
 
     @Query("SELECT * FROM user_profile WHERE id = :id")
     suspend fun getProfileById(id: Int): UserProfile
+
+    companion object
 }
