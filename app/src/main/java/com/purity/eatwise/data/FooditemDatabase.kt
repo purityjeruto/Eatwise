@@ -14,6 +14,7 @@ import com.purity.eatwise.model.User
 abstract class FooditemDatabase : RoomDatabase() {
     abstract fun fooditemDao(): Fooditem
     abstract fun userDao(): UserDao
+    abstract fun FooditemDao()
 
     companion object {
         @Volatile

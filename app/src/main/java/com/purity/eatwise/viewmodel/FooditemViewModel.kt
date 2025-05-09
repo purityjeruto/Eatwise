@@ -6,11 +6,9 @@ import android.net.Uri
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.purity.eatwise.data.FoodItem
-import com.purity.eatwise.data.FooditemDao
 import com.purity.eatwise.data.FooditemDatabase
-import com.purity.eatwise.data.ProductDatabase
-import com.purity.eatwise.model.Product
+import com.purity.eatwise.model.Fooditem
+import com.purity.eatwise.ui.theme.screens.home.FoodItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -24,7 +22,7 @@ class FooditemViewModel {
         private val context = app.applicationContext
         private val FooditemDao = FooditemDatabase.getDatabase(app).FooditemDao()
 
-        val allFoodItem: LiveData<List<FoodItem>> = Fooditem.getAllProducts()
+        val allFoodItem: LiveData<List<FoodItem>> = Fooditem.getAllFooditem()
 
         fun addFooditem(name: String, price: Double, phone: String, imageUri: String) {
             viewModelScope.launch(Dispatchers.IO) {
@@ -36,6 +34,8 @@ class FooditemViewModel {
                 FooditemDao.insertFoodItem(newFooditem)
             }
         }
+
+        private fun Unit.insertFoodItem(item: FoodItem) {}
 
         fun updateProduct(updatedFoodItem: FoodItem) {
             viewModelScope.launch(Dispatchers.IO) {
@@ -78,3 +78,7 @@ class FooditemViewModel {
         }
     }
 }
+
+fun Fooditem.Companion.getAllFooditem(): LiveData<List<FoodItem>> {}
+
+annotation class FoodItem

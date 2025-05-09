@@ -1,64 +1,65 @@
 package com.purity.eatwise.viewmodel
 
-
-
-
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.purity.eatwise.data.DataStoreHelper
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
+
+import com.purity.eatwise.model.Profile.UserProfile
+import com.purity.eatwise.repository.ProfileRepository
+import com.purity.eatwise.repository.FooditemRepository
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 
-class CalorieViewModel(private val dataStore: DataStoreHelper) : ViewModel() {
-    // User Profile State
-    private val _userProfile = MutableStateFlow(UserProfile())
-    val userProfile: StateFlow<UserProfile> = _userProfile.asStateFlow()
+class CalorieViewModel(
+    private val profileRepo: ProfileRepository,
+    private val foodRepo: FooditemRepository
+) : ViewModel() {
 
-    // Today's Food List State
-    private val _todayFoods = MutableStateFlow<List<FoodItem>>(emptyList())
-    val todayFoods: StateFlow<List<FoodItem>> = _todayFoods.asStateFlow()
+    // Profile: first available or empty fallback
+    val userProfile: StateFlow<UserProfile> =
+        profileRepo.allProfiles
+            .map { it.firstOrNull() ?: UserProfile() }
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), UserProfile())
 
-    init {
-        // Load profile when ViewModel starts
-        loadUserProfile()
-    }
+    private val currentDate: String = LocalDate.now().toString()
 
-    private fun loadUserProfile() {
+    // Daily foods for today
+    val todayFoods: StateFlow<List<FoodItem>> =
+        foodRepo.getFoodsForDate(currentDate)
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    // Add a new food for today
+    fun addFood(foodItem: FoodItem) {
         viewModelScope.launch {
-            dataStore.userProfileFlow.collect { profile ->
-                _userProfile.value = profile
-            }
+            foodRepo.insert(foodItem.copy(date = currentDate))
         }
     }
 
-    fun updateProfile(profile: UserProfile) {
-        _userProfile.value = profile
+    // Remove a food item
+    fun removeFood(foodItem: FoodItem) {
         viewModelScope.launch {
-            dataStore.saveProfile(profile)
+            foodRepo.delete(foodItem)
         }
     }
 
-    fun addFood(food: FoodItem) {
-        _todayFoods.value = _todayFoods.value + food
+    // Suspend function to calculate total daily calories
+    suspend fun calculateDailyCalories(): Int {
+        return foodRepo.getTotalCaloriesForDate(currentDate)
     }
 
-    fun removeFood(food: FoodItem) {
-        _todayFoods.value = _todayFoods.value.filter { it != food }
-    }
-
-    fun calculateDailyCalories(): Int {
-        return _todayFoods.value.sumOf { it.calories }
-    }
-
+    // Calculates remaining calories (safe fallback if profile is not loaded)
     fun getRemainingCalories(): Int {
-        return maxOf(0, _userProfile.value.dailyCalorieGoal - calculateDailyCalories())
+        val goal = userProfile.value.dailyCalorieGoal.takeIf { it > 0 } ?: 2000
+        val eaten = todayFoods.value.sumOf { it.calories }
+        return (goal - eaten).coerceAtLeast(0)
     }
 
-    fun clearTodayFoods() {
-        _todayFoods.value = emptyList()
+    // Update the current profile
+    fun updateProfile(profile: UserProfile) {
+        viewModelScope.launch {
+            profileRepo.saveProfile(profile)
+        }
     }
 }
+
+

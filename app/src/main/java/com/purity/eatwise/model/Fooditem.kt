@@ -11,6 +11,10 @@ class Fooditem {
     data class Fooditem(
         @PrimaryKey(autoGenerate = true) val id: Int = 0,
         val name: String,
+        val calories: Int,
+        val date: String // e.g., "2025-05-09"
 
     )
+
+
 }

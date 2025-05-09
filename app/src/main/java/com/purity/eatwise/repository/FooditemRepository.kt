@@ -3,10 +3,8 @@ package com.purity.eatwise.repository
 
 
 import android.content.Context
-import com.purity.eatwise.data.FoodItem
-import com.purity.eatwise.data.FooditemDao
 import com.purity.eatwise.data.FooditemDatabase
-
+import com.purity.eatwise.viewmodel.FoodItem
 
 
 class FooditemRepository(context: Context) {
@@ -16,7 +14,19 @@ class FooditemRepository(context: Context) {
         FooditemDao.insertFooditem(foodItem)
     }
 
-    fun getAllFooditem() =FooditemDao.getAllProducts()
+    fun getAllFooditem() =FooditemDao.getAllFooditem()
 
     suspend fun deleteFooditem(foodItem: FoodItem) = FooditemDao.deleteFooditem(foodItem)
+}
+
+private fun Unit.deleteFooditem(foodItem: FoodItem): Any {
+    TODO("Not yet implemented")
+}
+
+private fun Unit.getAllFooditem(): Any {
+    TODO("Not yet implemented")
+}
+
+private fun Unit.insertFooditem(foodItem: FoodItem) {
+    TODO("Not yet implemented")
 }

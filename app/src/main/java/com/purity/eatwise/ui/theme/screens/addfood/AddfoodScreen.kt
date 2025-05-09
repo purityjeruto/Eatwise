@@ -4,6 +4,7 @@ package com.purity.eatwise.ui.theme.screens.addfood
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,7 +22,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.purity.eatwise.model.Fooditem
-import com.purity.eatwise.ui.theme.screens.home.FoodItem
 import com.purity.eatwise.viewmodel.CalorieViewModel
 
 //import com.purity.eatwise.models.FoodItem
@@ -65,6 +65,13 @@ fun AddFoodScreen(viewModel: CalorieViewModel) {
             Text("Add Food")
         }
     }
+}
+
+private fun ColumnScope.Fooditem(
+    string: String,
+    i: Int
+): Fooditem {
+    TODO("Not yet implemented")
 }
 
 @Composable
