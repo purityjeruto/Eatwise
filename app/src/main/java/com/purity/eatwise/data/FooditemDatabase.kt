@@ -2,41 +2,36 @@ package com.purity.eatwise.data
 
 
 
+
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.purity.eatwise.model.Fooditem
+import com.purity.eatwise.model.User
 
+@Database(entities = [Fooditem::class, User::class], version = 3, exportSchema = false)
+abstract class FooditemDatabase : RoomDatabase() {
+    abstract fun fooditemDao(): Fooditem
+    abstract fun userDao(): UserDao
 
-class FooditemDatabase {
+    companion object {
+        @Volatile
+        private var INSTANCE:FooditemDatabase? = null
 
-
-    @Database(entities = [Fooditem::class], version = 1, exportSchema = false)
-    abstract class ContentDatabase : RoomDatabase() {
-        abstract fun contentDao(): FooditemDao
-
-        companion object {
-            @Volatile private var INSTANCE: FooditemDatabase? = null
-
-            fun getDatabase(context: Context): FooditemDatabase {
-                return INSTANCE ?: synchronized(this) {
-                    Room.databaseBuilder(
-                        context.applicationContext,
-                        FooditemDatabase::class.java,
-                        "content_database"
-                    ).build().also { INSTANCE = it }
-                }
-
-            }
-            object DefaultFoods {
-                val commonFoods = listOf(
-                    Fooditem.FoodItem(name = "Apple", calories = 95),
-                    Fooditem.FoodItem(name = "Banana", calories = 105)
+        fun getDatabase(context: Context): FooditemDatabase {
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    FooditemDatabase::class.java,
+                    "main_database"
                 )
+                    .fallbackToDestructiveMigration() // 💥 This clears DB on version change
+                    .build()
+                INSTANCE = instance
+                instance
             }
-        }
         }
     }
-
-
+}
 

@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import com.purity.eatwise.ui.theme.newOrange
 
@@ -90,14 +89,14 @@ fun HomeScreen() {
         // 📋 Food List
         LazyColumn {
             items(foodList) { food ->
-                FoodItem(food)
+                FoodItem(food, calorieValue)
             }
         }
     }
 }
 
 @Composable
-fun FoodItem(food: Food) {
+fun FoodItem(food: String, calorieValue: Int) {
     Card(
         modifier = Modifier
             .fillMaxWidth()

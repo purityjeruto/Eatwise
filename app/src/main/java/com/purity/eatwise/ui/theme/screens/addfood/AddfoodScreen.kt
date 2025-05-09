@@ -20,6 +20,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.purity.eatwise.model.Fooditem
+import com.purity.eatwise.ui.theme.screens.home.FoodItem
 import com.purity.eatwise.viewmodel.CalorieViewModel
 
 //import com.purity.eatwise.models.FoodItem
@@ -54,7 +56,7 @@ fun AddFoodScreen(viewModel: CalorieViewModel) {
         Button(
             onClick = {
                 val calorieValue = calories.toIntOrNull() ?: 0
-                viewModel.addFood(FoodItem(foodName, calorieValue))
+                viewModel.addFood(Fooditem(foodName, calorieValue))
                 foodName = ""
                 calories = ""
             },

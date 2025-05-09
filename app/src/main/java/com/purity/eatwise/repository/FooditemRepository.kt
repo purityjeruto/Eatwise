@@ -2,14 +2,21 @@ package com.purity.eatwise.repository
 
 
 
-import com.purity.eatwise.model.Content
+import android.content.Context
+import com.purity.eatwise.data.FoodItem
 import com.purity.eatwise.data.FooditemDao
+import com.purity.eatwise.data.FooditemDatabase
 
-class FooditemRepository(private val FooditemDao: FooditemDao) {
-    val allContent = FooditemDao.getAllContent()
 
-    suspend fun insert(content: Content) = FooditemDao.insertContent(content)
-    suspend fun update(content: Content) = FooditemDao.updateContent(content)
-    suspend fun delete(content: Content) = FooditemDao.deleteContent(content)
-    suspend fun getById(id: Int) = FooditemDao.getContentById(id)
+
+class FooditemRepository(context: Context) {
+    private val FooditemDao = FooditemDatabase.getDatabase(context).FooditemDao()
+
+    suspend fun insertFooditem(foodItem: FoodItem) {
+        FooditemDao.insertFooditem(foodItem)
+    }
+
+    fun getAllFooditem() =FooditemDao.getAllProducts()
+
+    suspend fun deleteFooditem(foodItem: FoodItem) = FooditemDao.deleteFooditem(foodItem)
 }
