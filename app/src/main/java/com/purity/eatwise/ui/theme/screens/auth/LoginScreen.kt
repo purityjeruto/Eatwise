@@ -22,18 +22,21 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.*
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.purity.eatwise.viewmodel.AuthViewModel
 import com.purity.eatwise.R
 import com.purity.eatwise.navigation.ROUT_HOME
-import com.purity.eatwise.navigation.ROUT_CONTACT
+import com.purity.eatwise.navigation.ROUT_MEAL
 import com.purity.eatwise.navigation.ROUT_REGISTER
+import com.purity.eatwise.ui.theme.EatWiseTheme
 import com.purity.eatwise.ui.theme.newBlack
 import com.purity.eatwise.ui.theme.newNavy
 import com.purity.eatwise.ui.theme.newOrange
-
+import com.purity.eatwise.ui.theme.screens.mealplanner.MealPlannerScreen
 
 
 @Composable
@@ -54,7 +57,7 @@ fun LoginScreen(
                 Toast.makeText(context, "Invalid Credentials", Toast.LENGTH_SHORT).show()
             } else {
                 if (user.role == "admin") {
-                    navController.navigate(ROUT_CONTACT) {
+                    navController.navigate(ROUT_MEAL) {
                     }
                 } else {
                     navController.navigate(ROUT_HOME) {
@@ -164,3 +167,5 @@ fun LoginScreen(
         }
     }
 }
+
+

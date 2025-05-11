@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.purity.eatwise"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -41,7 +41,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -50,9 +49,13 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-
     implementation(libs.androidx.navigation.compose)
-
+    implementation(libs.play.services.analytics.impl)
+    implementation(libs.support.annotations)
+    implementation(libs.androidx.animation.core.android)
+    implementation(libs.androidx.animation.core.android)
+    implementation(libs.androidx.animation.core.android)
+    implementation(libs.androidx.animation.core.android)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -61,60 +64,22 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-//navigation
-    implementation(libs.androidx.navigation.compose.v289)
-    implementation(libs.androidx.navigation.runtime.ktx)
 
 
     //Room
-
-    implementation (libs.androidx.room.runtime)
-    kapt (libs.androidx.room.compiler)
-    implementation (libs.androidx.room.ktx)
-
+    implementation ("androidx.room:room-runtime:2.6.1")
+    implementation ("androidx.room:room-runtime-android:2.7.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
 
     // Image Loading (Coil for Jetpack Compose)
-    implementation (libs.coil.compose)
+    implementation ("io.coil-kt:coil-compose:2.4.0")
 
-
-    //livedata
-    implementation(libs.androidx.runtime.livedata)
-
-
-    dependencies {
-        // ViewModel
-        implementation(libs.androidx.lifecycle.viewmodel.ktx)
-        implementation(libs.androidx.lifecycle.runtime.ktx.v270)
-
-        // Coroutines
-        implementation(libs.kotlinx.coroutines.android)
-
-        // DataStore
-        implementation(libs.androidx.datastore.preferences)
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //live data
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.4")
+    implementation("com.google.android.gms:play-services-analytics-impl:18.2.0")
+    implementation("com.google.android.gms.analytics.ecommerce.org.gradle-core:2.2")
+    implementation("androidx.compose.animation:animation-core-android:1.8.1")
 
 }
 
