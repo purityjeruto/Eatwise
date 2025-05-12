@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.purity.eatwise.R
+import com.purity.eatwise.navigation.ROUT_MEAL
 import com.purity.eatwise.ui.theme.EatWiseTheme
 import com.purity.eatwise.ui.theme.newBlack
 import com.purity.eatwise.ui.theme.newNavy
@@ -57,7 +58,9 @@ fun HomeScreen (navController: NavController,
         )
         Spacer(modifier = Modifier.height(32.dp))
         Button(
-           onClick = {},
+           onClick = {
+               navController.navigate(ROUT_MEAL)
+           },
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color.White,
                 contentColor = Color(0xFF4CAF50)

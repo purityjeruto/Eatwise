@@ -68,7 +68,6 @@ dependencies {
 
     //Room
     implementation ("androidx.room:room-runtime:2.6.1")
-    implementation ("androidx.room:room-runtime-android:2.7.1")
     kapt ("androidx.room:room-compiler:2.6.1")
     implementation ("androidx.room:room-ktx:2.6.1")
 
@@ -78,8 +77,9 @@ dependencies {
     //live data
     implementation("androidx.compose.runtime:runtime-livedata:1.6.4")
     implementation("com.google.android.gms:play-services-analytics-impl:18.2.0")
-    implementation("com.google.android.gms.analytics.ecommerce.org.gradle-core:2.2")
     implementation("androidx.compose.animation:animation-core-android:1.8.1")
+
+
 
 }
 

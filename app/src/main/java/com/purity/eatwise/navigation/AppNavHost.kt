@@ -12,18 +12,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.eddy.sokomart.ui.screens.products.ProductListScreen
 import com.purity.eatwise.data.UserDatabase
 import com.purity.eatwise.repository.UserRepository
 import com.purity.eatwise.ui.theme.screens.splash.SplashScreen
 import com.purity.eatwise.viewmodel.AuthViewModel
 import com.purity.eatwise.ui.screens.auth.LoginScreen
 import com.purity.eatwise.ui.screens.auth.RegisterScreen
-import com.purity.eatwise.ui.screens.products.AddProductScreen
-import com.purity.eatwise.ui.screens.products.EditProductScreen
 import com.purity.eatwise.ui.theme.screens.home.HomeScreen
 import com.purity.eatwise.ui.theme.screens.mealplanner.MealPlannerScreen
 import com.purity.eatwise.ui.theme.screens.nutritiontracker.NutritionTrackerScreen
+import com.purity.eatwise.ui.theme.screens.products.AddProductScreen
+import com.purity.eatwise.ui.theme.screens.products.EditProductScreen
+import com.purity.eatwise.ui.theme.screens.products.ProductListScreen
 import com.purity.eatwise.ui.theme.screens.quickrecipes.QuickRecipesScreen
 import com.purity.eatwise.ui.theme.screens.tips.TipsScreen
 import com.purity.eatwise.viewmodel.ProductViewModel
@@ -35,7 +35,7 @@ fun AppNavHost(
 
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    startDestination: String = ROUT_HOME,
+    startDestination: String = ROUT_SPLASH,
     productViewModel: ProductViewModel = viewModel(),
 
     ) {

@@ -1,4 +1,4 @@
-package com.purity.eatwise.ui.screens.products
+package com.purity.eatwise.ui.theme.screens.products
 
 import android.net.Uri
 import android.util.Log

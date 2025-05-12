@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
+
 class ProductViewModel(app: Application) : AndroidViewModel(app) {
 
     private val context = app.applicationContext
@@ -72,3 +73,4 @@ class ProductViewModel(app: Application) : AndroidViewModel(app) {
         }
     }
 }
+

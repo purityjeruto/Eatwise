@@ -2,10 +2,11 @@ package com.purity.eatwise.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.google.android.gms.analytics.ecommerce.Product
+import com.purity.eatwise.model.Product
 
 @Dao
 interface ProductDao {
+
     @Query("SELECT * FROM products")
     fun getAllProducts(): LiveData<List<Product>>
 
@@ -17,4 +18,8 @@ interface ProductDao {
 
     @Delete
     suspend fun deleteProduct(product: com.purity.eatwise.model.Product)
+
+    companion object
+
+
 }

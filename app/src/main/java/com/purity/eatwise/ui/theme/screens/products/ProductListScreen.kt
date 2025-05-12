@@ -1,4 +1,4 @@
-package com.eddy.sokomart.ui.screens.products
+package com.purity.eatwise.ui.theme.screens.products
 
 import android.content.ContentValues
 import android.content.Context
