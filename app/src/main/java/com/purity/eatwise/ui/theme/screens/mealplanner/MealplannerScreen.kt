@@ -1,41 +1,16 @@
 package com.purity.eatwise.ui.theme.screens.mealplanner
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.ExposedDropdownMenuBox
-import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -46,51 +21,44 @@ import androidx.navigation.compose.rememberNavController
 import com.purity.eatwise.navigation.ROUT_HOME
 import com.purity.eatwise.navigation.ROUT_MEAL
 import com.purity.eatwise.navigation.ROUT_NUTRITION
+import com.purity.eatwise.navigation.ROUT_RECIPES
 import com.purity.eatwise.ui.theme.EatWiseTheme
-import com.purity.eatwise.ui.theme.newBlack
 import com.purity.eatwise.ui.theme.newNavy
 import com.purity.eatwise.ui.theme.newOrange
-import com.purity.eatwise.ui.theme.screens.home.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MealPlannerScreen(navController: NavController) {
     var selectedMeal by remember { mutableStateOf("Breakfast") }
-    var isExpanded by remember { mutableStateOf(false) } // State for dropdown expansion
+    var isExpanded by remember { mutableStateOf(false) }
     val meals = listOf("Breakfast", "Lunch", "Dinner")
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("PharmaTrack Inventory", color = Color.White) },
-                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF0724B2))
+                title = { Text("Meal Planning", color = Color.White) },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFFA4911))
             )
         },
         bottomBar = {
-            NavigationBar(containerColor = Color(0xFF0A22BD)) {
+            NavigationBar(containerColor = Color(0xFFEC3D07)) {
                 NavigationBarItem(
                     icon = { Icon(Icons.Default.Home, contentDescription = "Home") },
                     label = { Text("Home") },
                     selected = false,
-                    onClick = {
-                        navController.navigate(ROUT_HOME)
-                    }
+                    onClick = { navController.navigate(ROUT_HOME) }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Star, contentDescription = "Dashboard") },
-                    label = { Text("Dashboard") },
+                    icon = { Icon(Icons.Default.Star, contentDescription = "Recipe") },
+                    label = { Text("Recipe") },
                     selected = true,
-                    onClick = {
-                        navController.navigate(ROUT_MEAL)
-                    }
+                    onClick = { navController.navigate(ROUT_RECIPES) }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "Suppliers") },
-                    label = { Text("Suppliers") },
+                    icon = { Icon(Icons.Default.Person, contentDescription = "Track") },
+                    label = { Text("Track") },
                     selected = false,
-                    onClick = {
-                        navController.navigate(ROUT_NUTRITION)
-                    }
+                    onClick = { navController.navigate(ROUT_NUTRITION) }
                 )
             }
         },
@@ -99,13 +67,15 @@ fun MealPlannerScreen(navController: NavController) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
+                .padding(padding)
                 .padding(16.dp)
+                .verticalScroll(rememberScrollState())
                 .background(newNavy)
         ) {
             Text("Meal Planner", style = MaterialTheme.typography.headlineLarge, color = newOrange)
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Dropdown menu for meal selection
+            // Dropdown menu
             ExposedDropdownMenuBox(
                 expanded = isExpanded,
                 onExpandedChange = { isExpanded = it }
@@ -119,7 +89,7 @@ fun MealPlannerScreen(navController: NavController) {
                     },
                     modifier = Modifier
                         .fillMaxWidth()
-                        .menuAnchor() // This modifier is important for the menu to work
+                        .menuAnchor()
                 )
 
                 ExposedDropdownMenu(
@@ -139,27 +109,74 @@ fun MealPlannerScreen(navController: NavController) {
             }
 
             Spacer(modifier = Modifier.height(24.dp))
-            Text("Suggested Meal:", color = newOrange, style = MaterialTheme.typography.headlineLarge)
-            Text(
-                when (selectedMeal) {
-                    "Breakfast" -> "Oatmeal + Fruits (300 kcal)"
-                    "Lunch" -> "Grilled Chicken + Veggies (450 kcal)"
-                    else -> "Salmon + Quinoa (500 kcal)"
+
+            // Meal Suggestion Section
+            Text("Suggested Meal:", color = newOrange, style = MaterialTheme.typography.headlineMedium)
+            Spacer(modifier = Modifier.height(12.dp))
+
+            when (selectedMeal) {
+                "Breakfast" -> {
+                    MealSuggestionCard(
+                        mealTitle = "Oatmeal & Fruits",
+                        mealDescription = "Warm oatmeal topped with bananas, berries, and honey (300 kcal).",
+                        backgroundColor = Color(0xFFEF6C00)
+                    )
                 }
-
-            )
-
+                "Lunch" -> {
+                    MealSuggestionCard(
+                        mealTitle = "Grilled Chicken & Veggies",
+                        mealDescription = "Grilled chicken breast with mixed vegetables and brown rice (450 kcal).",
+                        backgroundColor = Color(0xFF43A047)
+                    )
+                }
+                else -> {
+                    MealSuggestionCard(
+                        mealTitle = "Salmon & Quinoa",
+                        mealDescription = "Pan-seared salmon with quinoa and steamed broccoli (500 kcal).",
+                        backgroundColor = Color(0xFF1E88E5)
+                    )
+                }
+            }
         }
     }
-
-
 }
+
+@Composable
+fun MealSuggestionCard(
+    mealTitle: String,
+    mealDescription: String,
+    backgroundColor: Color
+) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = backgroundColor
+        ),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(
+                text = mealTitle,
+                style = MaterialTheme.typography.headlineSmall,
+                color = Color.White,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = mealDescription,
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.White
+            )
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun MealPlannerPreview() {
-    EatWiseTheme { // Your app's theme
-        MealPlannerScreen(
-            navController = rememberNavController()
-        )
+    EatWiseTheme {
+        MealPlannerScreen(navController = rememberNavController())
     }
 }

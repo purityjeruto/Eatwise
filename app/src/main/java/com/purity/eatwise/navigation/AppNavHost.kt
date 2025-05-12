@@ -1,5 +1,6 @@
 package com.purity.eatwise.navigation
 
+import NutritionTrackerScreen
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
@@ -20,7 +21,6 @@ import com.purity.eatwise.ui.screens.auth.LoginScreen
 import com.purity.eatwise.ui.screens.auth.RegisterScreen
 import com.purity.eatwise.ui.theme.screens.home.HomeScreen
 import com.purity.eatwise.ui.theme.screens.mealplanner.MealPlannerScreen
-import com.purity.eatwise.ui.theme.screens.nutritiontracker.NutritionTrackerScreen
 import com.purity.eatwise.ui.theme.screens.products.AddProductScreen
 import com.purity.eatwise.ui.theme.screens.products.EditProductScreen
 import com.purity.eatwise.ui.theme.screens.products.ProductListScreen

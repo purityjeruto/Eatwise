@@ -40,7 +40,7 @@ fun HomeScreen (navController: NavController,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Icon(
-            painter = painterResource(id = R.drawable.img_1), // Make sure this image exists
+            painter = painterResource(id = R.drawable.home), // Make sure this image exists
             contentDescription = "EatWise Logo",
             tint = Color.White,
             modifier = Modifier.size(120.dp)
