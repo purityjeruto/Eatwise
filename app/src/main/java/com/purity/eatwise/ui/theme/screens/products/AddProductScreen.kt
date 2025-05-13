@@ -26,7 +26,10 @@ import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.purity.eatwise.R
 import com.purity.eatwise.navigation.ROUT_ADD_PRODUCT
+import com.purity.eatwise.navigation.ROUT_HOME
 import com.purity.eatwise.navigation.ROUT_PRODUCT_LIST
+import com.purity.eatwise.ui.theme.newNavy
+import com.purity.eatwise.ui.theme.newOrange
 import com.purity.eatwise.viewmodel.ProductViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -51,8 +54,8 @@ fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Add Product", fontSize = 20.sp, fontWeight = FontWeight.Bold) },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(Color.LightGray),
+                title = { Text("Add Food", fontSize = 20.sp, fontWeight = FontWeight.Bold) },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = newOrange),
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = "Back")
@@ -67,14 +70,14 @@ fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) 
                         onDismissRequest = { showMenu = false }
                     ) {
                         DropdownMenuItem(
-                            text = { Text("Product List") },
+                            text = { Text("Food List") },
                             onClick = {
                                 navController.navigate(ROUT_PRODUCT_LIST)
                                 showMenu = false
                             }
                         )
                         DropdownMenuItem(
-                            text = { Text("Add Product") },
+                            text = { Text("Add Food") },
                             onClick = {
                                 navController.navigate(ROUT_ADD_PRODUCT)
                                 showMenu = false
@@ -86,45 +89,23 @@ fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) 
         },
         bottomBar = {
             BottomNavigationBar(navController)
+
         },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(paddingValues)
-                    .padding(16.dp),
+                    .padding(16.dp)
+                    .background(newNavy),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 // Product Name
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("Product Name") },
+                    label = { Text("Food Name") },
                     leadingIcon = { Icon(painter = painterResource(R.drawable.img_1), contentDescription = "Name") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                // Product Price
-                OutlinedTextField(
-                    value = price,
-                    onValueChange = { price = it },
-                    label = { Text("Product Price") },
-                    leadingIcon = { Icon(painter = painterResource(R.drawable.img_2), contentDescription = "Price") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-
-
-
-                Spacer(modifier = Modifier.height(10.dp))
-
-                // Phone Number
-                OutlinedTextField(
-                    value = phone,
-                    onValueChange = { phone = it },
-                    label = { Text("Phone Number") },
-                    leadingIcon = { Icon(painter = painterResource(R.drawable.img_2), contentDescription = "Price") },
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -159,15 +140,16 @@ fun AddProductScreen(navController: NavController, viewModel: ProductViewModel) 
                 // Add Product Button
                 Button(
                     onClick = {
+                        navController.navigate(ROUT_PRODUCT_LIST)
                         val priceValue = price.toDoubleOrNull()
                         if (priceValue != null) {
                             imageUri?.toString()?.let { viewModel.addProduct(name, priceValue, phone,it) }
-                            navController.navigate(ROUT_PRODUCT_LIST)
+
                         }
                     },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(8.dp),
-                    colors = ButtonDefaults.buttonColors(Color.LightGray)
+                    colors = ButtonDefaults.buttonColors(Color.Blue)
                 ) {
                     Text("Add Product", fontSize = 18.sp, fontWeight = FontWeight.Bold)
                 }
@@ -185,7 +167,7 @@ fun BottomNavigationBar(navController: NavController) {
     ) {
         NavigationBarItem(
             selected = false,
-            onClick = { navController.navigate(ROUT_PRODUCT_LIST) },
+            onClick = { navController.navigate(ROUT_HOME) },
             icon = { Icon(Icons.Default.Home, contentDescription = "Product List") },
             label = { Text("Home") }
         )

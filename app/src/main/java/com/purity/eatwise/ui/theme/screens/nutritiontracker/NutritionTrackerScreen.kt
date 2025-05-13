@@ -33,9 +33,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.purity.eatwise.navigation.ROUT_ADD_PRODUCT
 import com.purity.eatwise.navigation.ROUT_HOME
 import com.purity.eatwise.navigation.ROUT_MEAL
 import com.purity.eatwise.navigation.ROUT_NUTRITION
+import com.purity.eatwise.navigation.ROUT_RECIPES
 import com.purity.eatwise.ui.theme.EatWiseTheme
 import com.purity.eatwise.ui.theme.newNavy
 import com.purity.eatwise.ui.theme.newOrange
@@ -55,7 +57,9 @@ fun NutritionTrackerScreen(navController: NavController) {
             TopAppBar(
                 title = { Text("Nutrition Tracking", color = Color.White) },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFFA4911))
+
             )
+            Spacer(modifier = Modifier.height(30.dp))
         },
         bottomBar = {
             NavigationBar(containerColor = Color(0xFFEC3D07)) {
@@ -72,22 +76,25 @@ fun NutritionTrackerScreen(navController: NavController) {
                     onClick = { navController.navigate(ROUT_MEAL) }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Person, contentDescription = "track") },
-                    label = { Text("track") },
+                    icon = { Icon(Icons.Default.Person, contentDescription = "Recipes") },
+                    label = { Text("Recipe") },
                     selected = false,
-                    onClick = { navController.navigate(ROUT_NUTRITION) }
+                    onClick = { navController.navigate(ROUT_RECIPES) }
                 )
             }
         },
         containerColor = Color(0xFF38AD11)
     ) { padding ->
 
+        Spacer(modifier = Modifier.height(30.dp))
         Column(
+
             modifier = Modifier
                 .fillMaxSize()
                 .padding(16.dp)
                 .background(newNavy)
         ) {
+            Spacer(modifier = Modifier.height(30.dp))
             Text(
                 text = "Nutrition Tracker",
                 color = newOrange,
@@ -104,6 +111,7 @@ fun NutritionTrackerScreen(navController: NavController) {
 
             Button(
                 onClick = {
+                    navController.navigate(ROUT_ADD_PRODUCT)
                     if (foodInput.isNotBlank()) {
                         calories = 150 // Mock calculation
                         foodInput = ""
@@ -112,6 +120,7 @@ fun NutritionTrackerScreen(navController: NavController) {
                 modifier = Modifier
                     .padding(top = 8.dp)
                     .fillMaxWidth()
+                    .background(newOrange)
             ) {
                 Text("Add Food")
             }

@@ -30,6 +30,7 @@ import com.purity.eatwise.ui.theme.newWhite
 @Composable
 fun TipsScreen(navController: NavController) {
     var notificationsEnabled by remember { mutableStateOf(false) }
+    Spacer(modifier = Modifier.height(30.dp))
     val tips = listOf(
         "Drink water before meals!",
         "Eat slowly to avoid overeating.",
@@ -42,6 +43,7 @@ fun TipsScreen(navController: NavController) {
                 title = { Text("Tips & Reminders", color = Color.White) },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFFA4911))
             )
+            Spacer(modifier = Modifier.height(30.dp))
         },
         bottomBar = {
             NavigationBar(containerColor = Color(0xFFEC3D07)) {
@@ -68,6 +70,7 @@ fun TipsScreen(navController: NavController) {
         containerColor = Color(0xFF38AD11)
     ) { padding ->
 
+        Spacer(modifier = Modifier.height(16.dp))
         Column(
             modifier = Modifier
                 .fillMaxSize()

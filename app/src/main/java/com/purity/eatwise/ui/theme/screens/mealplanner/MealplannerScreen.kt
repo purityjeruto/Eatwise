@@ -64,6 +64,8 @@ fun MealPlannerScreen(navController: NavController) {
         },
         containerColor = Color(0xFF38AD11)
     ) { padding ->
+
+        Spacer(modifier = Modifier.height(16.dp))
         Column(
             modifier = Modifier
                 .fillMaxSize()

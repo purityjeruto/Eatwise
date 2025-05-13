@@ -30,6 +30,7 @@ import com.purity.eatwise.ui.theme.newOrange
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun QuickRecipesScreen(navController: NavController) {
+    Spacer(modifier = Modifier.height(30.dp))
     val recipes = listOf(
         "Green Smoothie" to "Spinach, Banana, Almond Milk",
         "Grilled Chicken Salad" to "Chicken, Lettuce, Tomatoes, Olive Oil",
@@ -44,6 +45,7 @@ fun QuickRecipesScreen(navController: NavController) {
                 title = { Text("Write your Recipe", color = Color.White) },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFFA4911))
             )
+            Spacer(modifier = Modifier.height(30.dp))
         },
         bottomBar = {
             NavigationBar(containerColor = Color(0xFFEC3D07)) {
@@ -54,21 +56,23 @@ fun QuickRecipesScreen(navController: NavController) {
                     onClick = { navController.navigate(ROUT_HOME) }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Add, contentDescription = "add") },
-                    label = { Text("add") },
+                    icon = { Icon(Icons.Default.Notifications, contentDescription = "reminder") },
+                    label = { Text("Reminder") },
                     selected = true,
-                    onClick = { navController.navigate(ROUT_ADD_PRODUCT) }
+                    onClick = { navController.navigate(ROUT_TIPS) }
                 )
                 NavigationBarItem(
-                    icon = { Icon(Icons.Default.Notifications, contentDescription = "Reminder") },
-                    label = { Text("Reminder") },
+                    icon = { Icon(Icons.Default.Person, contentDescription = "Track") },
+                    label = { Text("Track") },
                     selected = false,
-                    onClick = { navController.navigate(ROUT_TIPS) }
+                    onClick = { navController.navigate(ROUT_NUTRITION) }
                 )
             }
         },
         containerColor = Color(0xFF38AD11)
     ) { padding ->
+
+        Spacer(modifier = Modifier.height(30.dp))
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -141,6 +145,7 @@ fun QuickRecipesScreen(navController: NavController) {
                         style = MaterialTheme.typography.bodyMedium,
                         color = Color.DarkGray
                     )
+                    Spacer(modifier = Modifier.height(30.dp))
                 }
             }
         }

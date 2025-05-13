@@ -42,6 +42,8 @@ import com.purity.eatwise.navigation.ROUT_ADD_PRODUCT
 import com.purity.eatwise.navigation.ROUT_EDIT_PRODUCT
 import com.purity.eatwise.navigation.ROUT_PRODUCT_LIST
 import com.purity.eatwise.navigation.editProductRoute
+import com.purity.eatwise.ui.theme.newNavy
+import com.purity.eatwise.ui.theme.newOrange
 import com.purity.eatwise.viewmodel.ProductViewModel
 import java.io.IOException
 import java.io.OutputStream
@@ -62,8 +64,8 @@ fun ProductListScreen(navController: NavController, viewModel: ProductViewModel)
         topBar = {
             Column {
                 TopAppBar(
-                    title = { Text("Products", fontSize = 20.sp) },
-                    colors = TopAppBarDefaults.mediumTopAppBarColors(Color.LightGray),
+                    title = { Text(" Food list ", fontSize = 20.sp) },
+                    colors = TopAppBarDefaults.topAppBarColors(containerColor = newOrange),
                     actions = {
                         IconButton(onClick = { showMenu = true }) {
                             Icon(imageVector = Icons.Default.MoreVert, contentDescription = "Menu")
@@ -73,14 +75,14 @@ fun ProductListScreen(navController: NavController, viewModel: ProductViewModel)
                             onDismissRequest = { showMenu = false }
                         ) {
                             DropdownMenuItem(
-                                text = { Text("Product List") },
+                                text = { Text("Food  List") },
                                 onClick = {
                                     navController.navigate(ROUT_PRODUCT_LIST)
                                     showMenu = false
                                 }
                             )
                             DropdownMenuItem(
-                                text = { Text("Add Product") },
+                                text = { Text("Add Food") },
                                 onClick = {
                                     navController.navigate(ROUT_ADD_PRODUCT)
                                     showMenu = false
@@ -98,17 +100,17 @@ fun ProductListScreen(navController: NavController, viewModel: ProductViewModel)
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 12.dp, vertical = 8.dp),
-                    placeholder = { Text("Search products...") },
+                    placeholder = { Text("Search food...") },
                     singleLine = true,
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Default.Search,
                             contentDescription = "Search",
-                            tint = Color.Gray
+                            tint = Color.Green
                         )
                     },
                     colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = Color.Black,  // Border color when focused
+                        focusedBorderColor = Color.Green,  // Border color when focused
                         unfocusedBorderColor = Color.Gray, // Border color when not focused
                         focusedTextColor = Color.Black,
                         unfocusedTextColor = Color.DarkGray
@@ -123,6 +125,7 @@ fun ProductListScreen(navController: NavController, viewModel: ProductViewModel)
                 .fillMaxSize()
                 .padding(paddingValues)
                 .padding(16.dp)
+                .background(newNavy)
         ) {
             LazyColumn {
                 items(filteredProducts.size) { index ->
